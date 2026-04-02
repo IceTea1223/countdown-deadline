@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Angkor&family=Bokor&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Koulen&display=swap"
+      rel="stylesheet"
+    />
+    <title>Countdown 2026 | Dark Blue Edition</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: linear-gradient(145deg, #0a1628 0%, #07111f 100%);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family:
+          "Segoe UI",
+          "Poppins",
+          system-ui,
+          -apple-system,
+          "Inter",
+          "Arial",
+          sans-serif;
+        padding: 1.5rem;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      /* animated background particles effect */
+      body::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-image:
+          radial-gradient(
+            circle at 20% 40%,
+            rgba(30, 80, 150, 0.15) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 70%,
+            rgba(50, 100, 200, 0.1) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+        animation: slowDrift 20s ease-in-out infinite;
+      }
+
+      @keyframes slowDrift {
+        0% {
+          transform: translate(0, 0) scale(1);
+          opacity: 0.6;
+        }
+        50% {
+          transform: translate(2%, 1%) scale(1.05);
+          opacity: 0.8;
+        }
+        100% {
+          transform: translate(0, 0) scale(1);
+          opacity: 0.6;
+        }
+      }
+
+      /* main card container – modern, glassmorphic dark blue vibe */
+      .countdown-wrapper {
+        max-width: 800px;
+        width: 100%;
+        margin: 0 auto;
+        transition: all 0.3s ease;
+        animation: fadeInUp 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        position: relative;
+        z-index: 2;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(35px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* redesigning the .tickcounter element – dark blue premium look */
+      .tickcounter {
+        display: block;
+        width: 100%;
+        padding: 2.2rem 1.8rem 2.4rem 1.8rem;
+        text-align: center;
+        border-radius: 56px;
+        background: linear-gradient(135deg, #0f1a2f 0%, #0b1427 100%);
+        backdrop-filter: blur(2px);
+        box-shadow:
+          0 30px 50px -20px rgba(0, 0, 0, 0.6),
+          0 0 0 1px rgba(70, 130, 200, 0.2) inset,
+          0 0 20px rgba(30, 100, 200, 0.15);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.4s ease;
+        border: none;
+      }
+
+      .tickcounter:hover {
+        transform: translateY(-6px);
+        box-shadow:
+          0 40px 60px -22px rgba(0, 0, 0, 0.7),
+          0 0 0 1px rgba(80, 150, 240, 0.4) inset,
+          0 0 28px rgba(40, 120, 230, 0.25);
+      }
+
+      /* custom headline style with glow */
+      .countdown-title {
+        font-size: 2.2rem;
+        font-weight: 800;
+        letter-spacing: -0.2px;
+        margin-bottom: 0.9rem;
+        background: linear-gradient(125deg, #ffffff, #b8d4ff, #6ea8fe);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        display: inline-block;
+        padding-bottom: 8px;
+        border-bottom: 3px solid #2c5f9e;
+        text-shadow: 0 0 8px rgba(80, 150, 255, 0.3);
+        animation: titlePulse 3s infinite ease-in-out;
+      }
+
+      @keyframes titlePulse {
+        0% {
+          opacity: 0.95;
+          text-shadow: 0 0 0px rgba(80, 150, 255, 0.2);
+        }
+        50% {
+          opacity: 1;
+          text-shadow: 0 0 10px rgba(80, 150, 255, 0.5);
+        }
+        100% {
+          opacity: 0.95;
+          text-shadow: 0 0 0px rgba(80, 150, 255, 0.2);
+        }
+      }
+
+      /* timer boxes – modern dark blue neon style */
+      .time {
+        display: flex;
+        justify-content: center;
+        gap: 1.3rem;
+        flex-wrap: wrap;
+        margin: 2rem 0 1.2rem;
+      }
+
+      .box {
+        background: linear-gradient(145deg, #0e1a2c, #091326);
+        backdrop-filter: blur(4px);
+        padding: 1.2rem 0.9rem;
+        border-radius: 32px;
+        min-width: 105px;
+        box-shadow:
+          0 12px 25px -10px rgba(0, 0, 0, 0.5),
+          inset 0 1px 0 rgba(70, 130, 255, 0.2);
+        transition: all 0.25s ease;
+        border: 1px solid rgba(50, 120, 220, 0.35);
+        position: relative;
+        overflow: hidden;
+        animation: boxGlow 2s infinite alternate;
+      }
+
+      @keyframes boxGlow {
+        0% {
+          box-shadow:
+            0 12px 25px -10px rgba(0, 0, 0, 0.5),
+            inset 0 1px 0 rgba(70, 130, 255, 0.15);
+          border-color: rgba(50, 120, 220, 0.3);
+        }
+        100% {
+          box-shadow:
+            0 15px 30px -8px rgba(30, 100, 200, 0.4),
+            inset 0 1px 0 rgba(100, 170, 255, 0.4);
+          border-color: rgba(70, 150, 250, 0.6);
+        }
+      }
+
+      .box span {
+        font-size: 3.2rem;
+        font-weight: 800;
+        display: block;
+        line-height: 1.1;
+        background: linear-gradient(135deg, #eff6ff, #b8d6ff);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        text-shadow: 0 0 5px rgba(80, 150, 255, 0.5);
+        letter-spacing: 2px;
+        transition: transform 0.2s;
+      }
+
+      .box:hover span {
+        transform: scale(1.03);
+      }
+
+      .box {
+        font-weight: 700;
+        color: #8bb5f0;
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+      }
+
+      /* message area: stylish neon alert */
+      .msg {
+        margin-top: 1.3rem;
+        font-weight: 600;
+        font-size: 1.2rem;
+        padding: 0.75rem 1.5rem;
+        border-radius: 60px;
+        background: rgba(15, 35, 55, 0.8);
+        backdrop-filter: blur(8px);
+        display: inline-block;
+        width: auto;
+        color: #aad0ff;
+        border: 1px solid rgba(60, 130, 220, 0.5);
+        transition: all 0.3s ease;
+        animation: messagePulse 2.5s infinite;
+      }
+
+      @keyframes messagePulse {
+        0% {
+          background: rgba(15, 35, 55, 0.7);
+          border-color: rgba(60, 130, 220, 0.4);
+        }
+        50% {
+          background: rgba(20, 45, 75, 0.85);
+          border-color: rgba(80, 160, 255, 0.7);
+        }
+        100% {
+          background: rgba(15, 35, 55, 0.7);
+          border-color: rgba(60, 130, 220, 0.4);
+        }
+      }
+
+      /* Telegram button – dark blue synergy, animated */
+      .telegram-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        background: linear-gradient(105deg, #1e4a8f, #0f2f60);
+        border: none;
+        padding: 15px 32px;
+        margin-top: 32px;
+        border-radius: 80px;
+        font-size: 1.2rem;
+        font-weight: 700;
+        font-family: inherit;
+        color: white;
+        cursor: pointer;
+        box-shadow:
+          0 12px 20px -8px rgba(0, 20, 50, 0.5),
+          0 0 0 1px rgba(80, 150, 255, 0.3);
+        transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        text-decoration: none;
+        letter-spacing: 0.5px;
+        backdrop-filter: blur(2px);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .telegram-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: left 0.6s;
+      }
+
+      .telegram-btn:hover::before {
+        left: 100%;
+      }
+
+      .telegram-btn:hover {
+        transform: scale(1.03) translateY(-3px);
+        background: linear-gradient(105deg, #2a5cb8, #13448a);
+        box-shadow: 0 18px 28px -10px rgba(30, 80, 180, 0.6);
+        gap: 16px;
+      }
+
+      .telegram-btn:active {
+        transform: scale(0.97);
+      }
+
+      /* svg icon for telegram - blue tinted */
+      .telegram-icon {
+        width: 24px;
+        height: 24px;
+        fill: white;
+        transition: transform 0.2s ease;
+        filter: drop-shadow(0 0 2px rgba(0, 160, 255, 0.5));
+      }
+
+      .telegram-btn:hover .telegram-icon {
+        transform: translateX(3px);
+      }
+
+      /* footer extra elegance */
+      .extra-deco {
+        margin-top: 1.3rem;
+        font-size: 0.85rem;
+        color: #6c8fbc;
+        text-align: center;
+        letter-spacing: 0.6px;
+        opacity: 0.8;
+        font-weight: 500;
+        animation: fadeSoft 3s infinite;
+      }
+
+      @keyframes fadeSoft {
+        0% {
+          opacity: 0.6;
+        }
+        50% {
+          opacity: 0.9;
+        }
+        100% {
+          opacity: 0.6;
+        }
+      }
+
+      /* digit specific entry animation */
+      .box span {
+        animation: digitPop 0.3s ease-out;
+      }
+
+      @keyframes digitPop {
+        0% {
+          transform: scale(0.9);
+          opacity: 0.7;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .tickcounter {
+          padding: 1.5rem 1.2rem;
+        }
+        .box {
+          min-width: 72px;
+          padding: 0.8rem 0.5rem;
+        }
+        .box span {
+          font-size: 2.2rem;
+        }
+        .countdown-title {
+          font-size: 1.7rem;
+        }
+        .telegram-btn {
+          padding: 11px 24px;
+          font-size: 1rem;
+        }
+        .time {
+          gap: 0.9rem;
+        }
+      }
+
+      @media (max-width: 450px) {
+        .box span {
+          font-size: 1.8rem;
+        }
+        .box {
+          min-width: 62px;
+        }
+      }
+
+      /* deadline celebration styling */
+      .deadline-celebrate .box {
+        animation: none;
+      }
+      .glow-text {
+        text-shadow: 0 0 6px cyan;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="countdown-wrapper">
+      <!-- ✅ Dark blue themed countdown with data attributes -->
+      <a
+        style="font-family: &quot;Koulen&quot;, sans-serif"
+        data-type="countdown"
+        data-name="ពេលវេលាកំពុងរាប់ថយក្រេាយ"
+        data-bg_color="#0C1730"
+        data-name_color="#fefffc"
+        data-border_color="#1E4980"
+        data-dt="2026-04-04 23:59:00"
+        class="tickcounter"
+        id="mainCountdown"
+      ></a>
+
+      <!-- sleek telegram button with dynamic icon -->
+      <div style="display: flex; justify-content: center; margin-top: 10px​">
+        <button
+          style="font-family: &quot;Crimson Text&quot;, serif"
+          class="telegram-btn"
+          id="telegramRedirectBtn"
+        >
+          <svg
+            class="telegram-icon"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.6-1.38-.97-2.23-1.56-.99-.68-.35-1.06.22-1.67.15-.16 2.78-2.55 2.83-2.77.006-.03.01-.07-.02-.1-.04-.03-.08-.02-.12-.01-.06.02-1.95 1.24-5.5 3.63-.52.36-.99.53-1.41.52-.46-.01-1.35-.26-2.01-.48-.81-.27-1.45-.41-1.4-.87.03-.24.36-.49.99-.74 3.92-1.71 6.53-2.84 7.83-3.39 3.73-1.57 4.5-1.84 5.01-1.85.11 0 .36.03.52.19.13.13.17.3.18.47-.01.14-.02.28-.04.43z"
+            />
+          </svg>
+          <span>Click for Submit Project</span>
+        </button>
+      </div>
+      <div class="extra-deco"></div>
+    </div>
+
+    <script>
+      (function () {
+        const counters = document.querySelectorAll(".tickcounter");
+
+        counters.forEach((el) => {
+          let titleText = el.dataset.name || "Final Project Deadline:";
+          let bgColor = el.dataset.bg_color || "#0C1730";
+          let nameColor = el.dataset.name_color || "#7AB3FF";
+          let borderColor = el.dataset.border_color || "#1E4980";
+          let deadlineStr = el.dataset.dt;
+
+          // Apply dark blue background and border
+          el.style.backgroundColor = bgColor;
+          el.style.borderColor = borderColor;
+          el.style.borderWidth = "2px";
+          el.style.borderStyle = "solid";
+
+          let deadlineDate;
+          if (deadlineStr) {
+            const parts = deadlineStr.split(/[\s\-:]+/);
+            if (parts.length >= 6) {
+              const year = parseInt(parts[0], 10);
+              const month = parseInt(parts[1], 10) - 1;
+              const day = parseInt(parts[2], 10);
+              const hour = parseInt(parts[3], 10);
+              const minute = parseInt(parts[4], 10);
+              const second = parseInt(parts[5], 10);
+              deadlineDate = new Date(year, month, day, hour, minute, second);
+            } else {
+              deadlineDate = new Date(2026, 3, 4, 23, 59, 0);
+            }
+          } else {
+            deadlineDate = new Date(2026, 3, 4, 23, 59, 0);
+          }
+
+          // Build enhanced dark blue UI inside the element
+          el.innerHTML = `
+        <div class="countdown-inner">
+          <div class="title-wrap">
+            <h3 class="countdown-title" style="color:${nameColor}; border-bottom-color:${nameColor};">${titleText}</h3>
+          </div>
+          <div class="time" id="timerBoxes-${Math.floor(Math.random() * 10000)}">
+            <div class="box"><span class="d">0</span>Days</div>
+            <div class="box"><span class="h">0</span>Hours</div>
+            <div class="box"><span class="m">0</span>Minutes</div>
+            <div class="box"><span class="s">0</span>Seconds</div>
+          </div>
+          <div class="msg" id="deadlineMsg"></div>
+        </div>
+      `;
+
+          const timeContainer = el.querySelector(".time");
+          const daysSpan = el.querySelector(".d");
+          const hoursSpan = el.querySelector(".h");
+          const minutesSpan = el.querySelector(".m");
+          const secondsSpan = el.querySelector(".s");
+          const msgDiv = el.querySelector("#deadlineMsg");
+
+          // add subtle animation on digit update
+          function animateDigit(element) {
+            if (!element) return;
+            element.style.transform = "scale(1.08)";
+            setTimeout(() => {
+              if (element) element.style.transform = "";
+            }, 120);
+          }
+
+          let previousValues = { d: -1, h: -1, m: -1, s: -1 };
+
+          function updateCountdown() {
+            const now = new Date();
+            const gap = deadlineDate - now;
+
+            if (gap <= 0) {
+              if (timeContainer) {
+                timeContainer.innerHTML = `<div style="display:flex; justify-content:center; align-items:center; gap:1.2rem; flex-wrap:wrap;">
+              <div class="box" style="background:#0E2A45; border-color:#3E82D0;"><span>✨</span>DEADLINE</div>
+              <div class="box" style="background:#0A1E38; border-color:#4A8EEF;"><span>🏆</span>REACHED</div>
+            </div>`;
+              }
+              if (msgDiv) {
+                msgDiv.innerHTML = "Mission Complete! Submit your project now";
+                msgDiv.style.background = "rgba(20, 50, 90, 0.9)";
+                msgDiv.style.color = "#C2E0FF";
+                msgDiv.style.fontWeight = "bold";
+                msgDiv.style.borderColor = "#5F9EFF";
+              }
+              return;
+            }
+
+            const totalSeconds = Math.floor(gap / 1000);
+            const days = Math.floor(totalSeconds / (3600 * 24));
+            const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+
+            if (daysSpan && previousValues.d !== days) {
+              daysSpan.innerText = days;
+              animateDigit(daysSpan);
+              previousValues.d = days;
+            } else if (daysSpan) daysSpan.innerText = days;
+
+            if (hoursSpan && previousValues.h !== hours) {
+              hoursSpan.innerText = hours;
+              animateDigit(hoursSpan);
+              previousValues.h = hours;
+            } else if (hoursSpan) hoursSpan.innerText = hours;
+
+            if (minutesSpan && previousValues.m !== minutes) {
+              minutesSpan.innerText = minutes;
+              animateDigit(minutesSpan);
+              previousValues.m = minutes;
+            } else if (minutesSpan) minutesSpan.innerText = minutes;
+
+            if (secondsSpan) {
+              secondsSpan.innerText = seconds;
+              if (previousValues.s !== seconds) {
+                animateDigit(secondsSpan);
+                previousValues.s = seconds;
+              }
+            }
+
+            // dynamic urgency messages - dark blue style
+            if (gap < 3 * 24 * 3600 * 1000 && gap > 0) {
+              msgDiv.innerHTML = "លឿនៗម៉េា​!​ ខ្ញុំកំពុងចាំមើលទឹកដៃ...";
+              msgDiv.style.background = "rgba(30, 70, 120, 0.85)";
+              msgDiv.style.color = "#fefffc";
+              msgDiv.style.borderColor = "#FFB347";
+            } else if (gap < 7 * 24 * 3600 * 1000 && gap > 0) {
+              msgDiv.innerHTML =
+                "📅 One week left — Deep focus mode activated 🚀";
+              msgDiv.style.background = "rgba(20, 60, 105, 0.8)";
+              msgDiv.style.color = "#B8DEFF";
+              msgDiv.style.borderColor = "#5A9CFF";
+            } else {
+              msgDiv.innerHTML =
+                "🌟 Stay relentless, build greatness. The deadline awaits! 🌟";
+              msgDiv.style.background = "rgba(15, 45, 80, 0.75)";
+              msgDiv.style.color = "#AACCF5";
+              msgDiv.style.borderColor = "#3E7BC9";
+            }
+          }
+
+          updateCountdown();
+          const intervalId = setInterval(updateCountdown, 1000);
+          el._countdownInterval = intervalId;
+        });
+
+        // TELEGRAM BUTTON with animated dark blue synergy
+        const telegramBtn = document.getElementById("telegramRedirectBtn");
+        if (telegramBtn) {
+          telegramBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            // 🔵 Replace with your actual Telegram invite link for production
+            const telegramUrl = "https://t.me/hongkimchhay";
+            // For demonstration / custom: you can replace the URL above.
+            // To make it functional, update with real invite: e.g., "https://t.me/yourprojectchannel"
+
+            // Provide user feedback and redirect
+            telegramBtn.style.transform = "scale(0.96)";
+            telegramBtn.style.background = "#0F3A6E";
+            setTimeout(() => {
+              if (telegramBtn) telegramBtn.style.transform = "";
+              telegramBtn.style.background =
+                "linear-gradient(105deg, #1E4A8F, #0F2F60)";
+            }, 180);
+
+            // Open in new tab
+            window.open(telegramUrl, "_blank", "noopener,noreferrer");
+          });
+        }
+
+        // Additional floating animation for extra polish
+        const styleAnim = document.createElement("style");
+        styleAnim.textContent = `
+      @keyframes floatGlow {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-5px); }
+        100% { transform: translateY(0px); }
+      }
+      .tickcounter .box {
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+      .tickcounter .box:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 18px 28px -12px rgba(0, 30, 80, 0.7), inset 0 1px 0 rgba(80, 160, 255, 0.5);
+      }
+      .countdown-title {
+        animation: titlePulse 3s infinite ease-in-out;
+      }
+    `;
+        document.head.appendChild(styleAnim);
+
+        // For any data-telegram override (optional advanced)
+        const customLink = document.querySelector("[data-telegram-url]");
+        if (customLink && telegramBtn) {
+          const newLink = customLink.getAttribute("data-telegram-url");
+          if (
+            newLink &&
+            (newLink.includes("t.me") || newLink.startsWith("https://"))
+          ) {
+            telegramBtn.onclick = (e) => {
+              e.preventDefault();
+              window.open(newLink, "_blank");
+            };
+          }
+        }
+
+        // Load celebration ready
+        window.addEventListener("load", () => {
+          console.log("Dark Blue Countdown with animations — ready for 2026");
+        });
+      })();
+    </script>
+
+    <!-- 
+  💙 Dark Blue Edition with glowing animations & smooth Telegram redirect.
+  🔁 To replace Telegram link, edit inside script: const telegramUrl = "https://t.me/+YOUR_GROUP_LINK"
+  🕒 Countdown set to 2026-04-04 23:59:00 — fully dynamic.
+-->
+  </body>
+</html>
